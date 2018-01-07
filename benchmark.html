@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<h1>
+Benchmark jQuery selectors
+</h1>
+<input type="text" name="input1" class="input1" id="input1" />
+<h3><span id="num"></span> selections:</h3>
+<dl>
+  <dt>By Name</dt>
+    <dd id="result-name"></dd>
+  <dt>By Class</dt>
+    <dd id="result-class"></dd>
+  <dt>By ID</dt>
+    <dd id="result-id"></dd>
+</dl>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+window.onload = function () {
+jQuery('#num').html(getIterationNumber());
+jQuery('#result-name').html(testNameSelector() + ' ms');
+jQuery('#result-class').html(testClassSelector() + ' ms');
+jQuery('#result-id').html(testIdSelector() + ' ms');
+
+function getIterationNumber()
+{
+	return 100000;
+}
+
+function testNameSelector()
+{
+	var n = getIterationNumber();
+	var start = Date.now();
+	for (var i = 0; i < n; i++) {
+  	jQuery('input[name=input1]').length;
+  }
+  return Date.now() - start;
+}
+
+function testClassSelector()
+{
+	var n = getIterationNumber();
+	var start = Date.now();
+	for (var i = 0; i < n; i++) {
+  	jQuery('.input1').length;
+  }
+  return Date.now() - start;
+}
+
+function testIdSelector()
+{
+	var n = getIterationNumber();
+	var start = Date.now();
+	for (var i = 0; i < n; i++) {
+  	jQuery('#input1').length;
+  }
+  return Date.now() - start;
+}
+};
+</script>
+</body>
+</html>
